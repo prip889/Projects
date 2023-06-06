@@ -10,7 +10,7 @@
     <main>
         <div>
             <h1>My Projects</h1>
-                <p>You are not assigned to any projects</p>
+            {% if projects %}
             <table>
                 <thead>
                     <tr>
@@ -21,13 +21,16 @@
                 <tbody>
                     {% for project in projects %}
                     <tr>
-                        <td>{{ project.name }}</td>
+                        <td><a href="{% url 'show_project' id=project.id %}"> {{ project.name }}</a></td>
                         <td>{{ project.items.count }}</td>
+                        <td> {{project.tasks.all|length }}</td>
                     </tr>
                     {% endfor %}
-
                 </tbody>
             </table>
+            {% else %}
+            <p>You are not assigned to any projects</p>
+            {% endif %}
         </div>
     </main>
 </body>
